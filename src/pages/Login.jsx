@@ -14,8 +14,8 @@ export default function Login() {
     const authContext = useContext(AuthContext)
 
     function login() {
-        const isCorrectEmail = email === "naqiuddin@email.com";
-        const isCorrectPassword = password === "password";
+        const isCorrectEmail = email === authContext.userData.email;
+        const isCorrectPassword = password === authContext.userData.password;
         if (isCorrectEmail && isCorrectPassword) {
             authContext.setToken("1234");
             navigate("/")
@@ -30,6 +30,7 @@ export default function Login() {
                         <h1>Just some text here</h1>
                     </Col>
                     <Col sm={5} className="my-5">
+                        <h3 className="mb-3">Sign in to TaDel</h3>
                         <Form>
                             <Form.Group className="my-3" controlId="email">
                                 <Form.Label>Email address</Form.Label>
@@ -56,7 +57,7 @@ export default function Login() {
                             <br />
                             <br />
                             <Form.Group>
-                                <Form.Text className="text-muted">Don&apos;t have an account? Sign up here</Form.Text>
+                                <Form.Text className="text-muted">Don&apos;t have an account? Sign up <a href="/signup">here</a></Form.Text>
                             </Form.Group>
                         </Form>
                     </Col>

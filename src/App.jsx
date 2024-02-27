@@ -15,6 +15,7 @@ import EditPage from './pages/EditPage';
 import Login from './pages/Login';
 import RequireAuth from './components/RequireAuth';
 import { useContext } from 'react';
+import Signup from './pages/SignUp';
 
 
 export function Layout() {
@@ -46,14 +47,16 @@ export function Layout() {
 export default function App() {
 
   const [token, setToken] = useLocalStorage("token", null);
+  const [userData, setUserData] = useLocalStorage("userData", [])
 
 
   return (
-    <AuthContext.Provider value={{ token, setToken }}>
+    <AuthContext.Provider value={{ token, setToken, userData, setUserData }}>
       <Provider store={store}>
         <BrowserRouter>
           <Routes>
             <Route path='login' element={<Login />} />
+            <Route path='signup' element={<Signup />} />
             <Route path="/" element={<RequireAuth><Layout /></RequireAuth>}>
               <Route index element={<Home />} />
               <Route path="addtodo" element={<AddTodoPage />} />
