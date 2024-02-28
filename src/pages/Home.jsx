@@ -1,7 +1,11 @@
-import { Badge, Button, Card, Col, Container, Row } from "react-bootstrap"
+import { Badge, Button, Card, Col, Container, Image, Row } from "react-bootstrap"
 import { useDispatch, useSelector } from "react-redux"
 import { useNavigate } from "react-router-dom"
 import { deleteTodo } from "../feature/todoSlice"
+import { addArchive } from "../feature/archiveSlice"
+import { useContext } from "react"
+
+import { AuthContext } from "../feature/AuthContext"
 
 
 export default function Home() {
@@ -10,26 +14,41 @@ export default function Home() {
     const navigate = useNavigate()
     const dispatch = useDispatch()
 
+    const authContext = useContext(AuthContext)
+
     function handleUpdate({ id }) {
         navigate(`/edittodo/${id}`)
     }
 
-    function handleDelete(id) {
-        dispatch(deleteTodo({ id: id }))
+    function handleArchive(todo, id) {
+        dispatch(addArchive(todo))
+        dispatch(deleteTodo({ id }))
     }
 
+
     return (
-        <Container>
-            <h1 className="my-4">Welcome</h1>
-            <Row>
-                <CardGroup todos={todos} handleUpdate={handleUpdate} handleDelete={handleDelete} />
-            </Row>
-        </Container>
+        <Container >
+            <h1 className="my-4">Welcome, {authContext.userData.username}</h1>
+            {todos.length > 0 ? (
+                <Row>
+                    <CardGroup todos={todos} handleUpdate={handleUpdate} handleArchive={handleArchive} />
+                </Row>) : (
+                <Container className="d-flex justify-content-center align-items-center" style={{ height: "70vh" }}>
+                    <Button variant="outline-light" style={{ color: "#212529" }} onClick={() => navigate('/addtask')}>
+                        <Image
+                            src="src\components\vecteezy_add-flat-icon_11097573.png"
+                            style={{ height: "80px" }}
+                        />
+                        <h4>Add task</h4>
+                    </Button>
+                </Container>)
+            }
+        </Container >
     )
 }
 
 
-function CardGroup({ todos, handleUpdate, handleDelete }) {
+function CardGroup({ todos, handleUpdate, handleArchive }) {
 
     return todos.map((todo) => {
         const bg = todo.completed ? "success" : "danger";
@@ -45,8 +64,8 @@ function CardGroup({ todos, handleUpdate, handleDelete }) {
                         <Button className="mt-3" size="sm" variant="light" onClick={() => handleUpdate(todo)}>
                             <i className="bi bi-pencil"></i>
                         </Button>
-                        <Button className="mt-3 ms-3" size="sm" variant="light" onClick={() => handleDelete(todo.id)}>
-                            <i className="bi bi-trash3"></i>
+                        <Button className="mt-3 ms-3" size="sm" variant="outline-warning" onClick={() => handleArchive(todo, todo.id)}>
+                            <i className="bi bi-archive"></i>
                         </Button>
                     </Card.Body>
                 </Card>

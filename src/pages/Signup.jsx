@@ -25,7 +25,7 @@ export default function Signup() {
         <>
             <Container className="p-5 mt-5">
                 <Row>
-                    <Col sm={7} className="align-items-center">
+                    <Col sm={7} className="d-flex align-items-center">
                         <Image src="src\components\16897435-removebg-preview.png" style={{ height: "200px" }} />
                         <h1>Your Path to Effortless Delegation Begins Here</h1>
                     </Col>
