@@ -9,6 +9,8 @@ export default function Login() {
 
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const [invalidEmail, setInvalidEmail] = useState(false)
+    const [invalidPassword, setInvalidPassword] = useState(false)
 
     const navigate = useNavigate()
     const authContext = useContext(AuthContext)
@@ -19,6 +21,11 @@ export default function Login() {
         if (isCorrectEmail && isCorrectPassword) {
             authContext.setToken("1234");
             navigate("/")
+        } else if (!isCorrectEmail) {
+            setInvalidEmail(true)
+            console.log("lepas")
+        } else if (!isCorrectPassword) {
+            setInvalidPassword(true)
         }
     }
 
@@ -42,6 +49,9 @@ export default function Login() {
                                     onChange={(e) => setEmail(e.target.value)}
                                     required
                                 />
+                                {invalidEmail && (
+                                    <Form.Text className="text-muted">Sorry, we could not find your account</Form.Text>
+                                )}
                             </Form.Group>
                             <Form.Group className="my-3" controlId="password">
                                 <Form.Label>Password</Form.Label>
@@ -52,6 +62,9 @@ export default function Login() {
                                     onChange={(e) => setPassword(e.target.value)}
                                     required
                                 />
+                                {invalidPassword && (
+                                    <Form.Text className="text-muted">Wrong password, check and try again?</Form.Text>
+                                )}
                             </Form.Group>
                             <Button variant="outline-secondary" className="my-3" onClick={login}>Login</Button>
                             <br />
