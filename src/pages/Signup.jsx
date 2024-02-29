@@ -31,7 +31,7 @@ export default function Signup() {
                     </Col>
                     <Col sm={5} className="my-5">
                         <h3 className="mb-3">Sign Up to TaDel</h3>
-                        <Form>
+                        <Form onSubmit={handleRegister}>
                             <Form.Group className="my-3" controlId="username">
                                 <Form.Label>Username</Form.Label>
                                 <Form.Control
@@ -76,7 +76,7 @@ export default function Signup() {
                                         Please check the password entered
                                     </Form.Text>)}
                             </Form.Group>
-                            <Button variant="outline-secondary" className="my-3" onClick={handleRegister}>Register</Button>
+                            <Button variant="outline-secondary" className="my-3" type="submit">Register</Button>
                             <br />
                             <br />
                             <br />

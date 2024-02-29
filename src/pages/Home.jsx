@@ -52,13 +52,19 @@ function CardGroup({ todos, handleUpdate, handleArchive }) {
 
     return todos.map((todo) => {
         const bg = todo.completed ? "success" : "danger";
+        const date = new Date(todo.id);
+        const formattedDate = date.toLocaleDateString('en-GB');
 
         return (
-            <Col md={4} key={todo.id}>
-                <Card>
-                    <Card.Body>
+            <Col md={4} key={todo.id} style={{ marginBottom: "30px" }}>
+                <Card >
+                    <Card.Body style={{ paddingBottom: "0px" }}>
                         <Card.Title>{todo.title}</Card.Title>
-                        <Card.Text>{todo.description}</Card.Text>
+                    </Card.Body>
+                    <Card.Body style={{ paddingBlock: "0px", height: "75px", overflowY: 'auto' }}>
+                        <Card.Text style={{ whiteSpace: 'pre-wrap' }}>{todo.description}</Card.Text>
+                    </Card.Body>
+                    <Card.Body style={{ paddingTop: "10px" }}>
                         <Badge bg={bg}>{!todo.completed && "Not"} Completed</Badge>
                         <br />
                         <Button className="mt-3" size="sm" variant="light" onClick={() => handleUpdate(todo)}>
@@ -68,6 +74,7 @@ function CardGroup({ todos, handleUpdate, handleArchive }) {
                             <i className="bi bi-archive"></i>
                         </Button>
                     </Card.Body>
+                    <Card.Footer className="text-muted">Posted on: {formattedDate}</Card.Footer>
                 </Card>
             </Col>
         )
