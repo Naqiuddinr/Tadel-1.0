@@ -1,8 +1,7 @@
-# React + Vite
+# Tadel 1.0 (Kanban Board To-do app)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+**Requirement**: To create a front-end for a todo app using redux
 
-Currently, two official plugins are available:
+**Challenge**: First time using redux, jump right into coding after only 2 days of learning
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+**Overcoming challenge**: Using a sample data as initial state. Once I input a sample data, I can view how the data is structured using the Redxu Devtool - [Chrome Extension](https://chromewebstore.google.com/detail/lmhkpmbekcpmknklioeibfkpmmfibljd). With that understanding, calling up the data to view it on the front-end becomes easier.
